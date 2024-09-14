@@ -31,6 +31,7 @@ async function getData(homeid: string) {
       categoryName: true,
       price: true,
       country: true,
+      locationAttribute: true,
       Reservation: {
         where: {
           homeId: homeid,
@@ -59,6 +60,8 @@ export default async function HomeRoute({
   const country = getCountryByValue(data?.country as string);
   const { getUser } = getKindeServerSession();
   const user = await getUser();
+
+  console.log(data);
 
   return (
     <div className='w-[75%] mx-auto mt-10 mb-12'>
@@ -107,7 +110,10 @@ export default async function HomeRoute({
 
           <Separator className='my-7' />
 
-          <HomeMap locationValue={country?.value as string} />
+          <HomeMap
+            locationValue={country?.value as string}
+            locationAttribute={data?.locationAttribute}
+          />
         </div>
 
         <form action={createReservation}>

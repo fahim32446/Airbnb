@@ -2,6 +2,7 @@
 
 import { createLocation } from '@/app/actions';
 import { CreatioBottomBar } from '@/app/components/CreationBottomBar';
+import Map from '@/app/components/Map';
 import { useCountries } from '@/app/lib/getCountries';
 import {
   Select,
@@ -62,11 +63,15 @@ export default function AddressRoutw({ params }: { params: { id: string } }) {
               </SelectContent>
             </Select>
           </div>
-
-          <LazyMap
+          <Map
             locationValue={locationValue}
             setLocationAttribute={setLocationAttribute}
           />
+
+          {/* <LazyMap
+            locationValue={locationValue}
+            setLocationAttribute={setLocationAttribute}
+          /> */}
         </div>
 
         <CreatioBottomBar />

@@ -34,9 +34,11 @@ function MoveMapToLocation({
 export default function Map({
   locationValue,
   setLocationAttribute,
+  locationAttribute,
 }: {
   locationValue: string;
   setLocationAttribute?: Dispatch<SetStateAction<LatLngExpression | undefined>>;
+  locationAttribute?: string | null | undefined;
 }) {
   const { toast } = useToast();
   const { getCountryByValue } = useCountries();
@@ -51,10 +53,12 @@ export default function Map({
   );
 
   useEffect(() => {
-    if (latLang) {
+    if (locationAttribute) {
+      setMarkerPosition(JSON.parse(locationAttribute));
+    } else if (latLang) {
       setMarkerPosition(latLang);
     }
-  }, [latLang]);
+  }, [latLang, locationAttribute]);
 
   function MapClickHandler() {
     useMapEvent('click', (event) => {
@@ -68,6 +72,7 @@ export default function Map({
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
+
           const newLocation: [number, number] = [latitude, longitude];
           setMarkerPosition(newLocation);
         },
@@ -95,7 +100,7 @@ export default function Map({
     if (markerPosition && setLocationAttribute) {
       setLocationAttribute(markerPosition);
     }
-  }, [setLocationAttribute]);
+  }, [markerPosition]);
 
   return (
     <>
