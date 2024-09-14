@@ -26,17 +26,18 @@ model User {
 model Home {
   id String @id @default(uuid())
 
-  title        String?
-  description  String?
-  guests       String?
-  bedrooms     String?
-  bathrooms    String?
-  country      String?
-  photo        String?
-  price        Int?
-  categoryName String?
-  Favorite     Favorite[]
-  Reservation  Reservation[]
+  title             String?
+  description       String?
+  guests            String?
+  bedrooms          String?
+  bathrooms         String?
+  country           String?
+  locationAttribute String?
+  photo             String?
+  price             Int?
+  categoryName      String?
+  Favorite          Favorite[]
+  Reservation       Reservation[]
 
   addedCategory    Boolean @default(false)
   addedDescription Boolean @default(false)
